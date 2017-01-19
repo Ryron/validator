@@ -1,0 +1,79 @@
+/*！
+ * 表单样式
+ */
+/**重置样式**/
+.form .content {
+  background-color: #fff;
+}
+.form header {
+  position: relative;
+}
+.form .list-block {
+  margin: 0;
+}
+.list-block .item-title {
+  overflow: auto;
+  text-overflow: clip;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  position: relative;
+  min-height: 2rem;
+}
+.row:after {
+  content: '';
+  position: absolute;
+  left: 0rem;
+  bottom: 0;
+  right: auto;
+  top: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #e7e7e7;
+  display: block;
+  z-index: 15;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+.row .row-item {
+  margin: 4px;
+}
+.row .row-item-title {
+  width: 100%;
+  text-align: center;
+}
+.row-item .star {
+  color: red;
+}
+.list-block .row-item input.item-text,
+.list-block .row-item textarea,
+.list-block .row-item select {
+  background-color: #ffffff;
+  border-top: solid 1px #a7b5bc;
+  border-left: solid 1px #a7b5bc;
+  border-right: solid 1px #ced9df;
+  border-bottom: solid 1px #ced9df;
+}
+.radiocheck .item-media {
+  display: inline-block;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+.radiocheck label.label-checkbox i.icon-form-checkbox.fix-checkbox {
+  border-radius: 0rem;
+}
+.color-error {
+  border-color: red !important;
+}
