@@ -21,7 +21,7 @@
 			    	<h1 class="title">demo</h1>
 			    </header>
 			    <!-- 单选 -->
-			    <div class="row">
+			    <!-- <div class="row">
 			    	<div class="col-33">
 			    	    <div class="row-item">
 				            <span class="star">*</span>
@@ -36,11 +36,15 @@
 					            <input type="radio" name="radio" data-rules="required" data-descriptions="请选择单选" value="1">
 					            <div class="item-media"><i class="icon icon-form-checkbox"></i>大专</div>
 					        </label>
+					        <label class="label-checkbox">
+					            <input type="radio" name="radio" data-rules="required" data-descriptions="请选择单选" value="2">
+					            <div class="item-media"><i class="icon icon-form-checkbox"></i>中专</div>
+					        </label>
 		              	</div>
 		            </div>
-			    </div>
+			    </div> -->
 			    <!-- 多选 -->
-			    <div class="row">
+<!-- 			    <div class="row">
 			    	<div class="col-33">
 			    	    <div class="row-item">
 				            <span class="star">*</span>
@@ -66,7 +70,7 @@
 					        </label>
 		              	</div>
 		            </div>
-			    </div>
+			    </div> -->
 			    <!-- url -->
 			    <div class="row">
 			    	<div class="col-33">
@@ -79,7 +83,7 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="url" placeholder="请输入地址" data-rules="required;url" data-descriptions="地址错误">
+		                	<input class="item-text" type="text" value="" name="url" placeholder="请输入地址" data-rules="url;required" data-descriptions="地址错误">
 		                </div>
 		            </div>
 			    </div>
@@ -109,7 +113,7 @@
 		            </div>
 		             <div class="col-66">
 		              	<div class="row-item">
-		              		<input class="item-text" id="date" name="date" type="text" value="" placeholder="请选择出生日期" data-required="true" data-descriptions="出生日期">
+		              		<input class="item-text" id="date" name="date" type="text" value="" placeholder="请选择出生日期" data-rules="required" data-descriptions="出生日期">
 		              	</div>
 		            </div>
 			    </div>
@@ -124,7 +128,7 @@
 		            </div>
 		             <div class="col-66">
 		              	<div class="row-item">
-			             	<input class="item-text" type="text" name="distreat" id='city-picker' placeholder="请选择地区" data-required="true" data-descriptions="单位地域" />
+			             	<input class="item-text" type="text" name="distreat" id='city-picker' placeholder="请选择地区" data-rules="required" data-descriptions="单位地域" />
  							<input type="hidden" id="province">
  							<input type="hidden" id="city">
  							<input type="hidden" id="area">
@@ -142,16 +146,14 @@
 		            </div>
 		             <div class="col-66">
 		              	<div class="row-item">
-		              		<input class="item-text" id="picker" type="text" value="" placeholder="请选择下拉控件" />
-		              		<input id="picker_hide" type="hidden" name="xueli" data-required="true" data-descriptions="下拉控件">
+		              		<input class="item-text" id="picker" type="text" data-rules="required" value="" placeholder="请选择下拉控件" />
+		              		<input id="picker_hide" type="hidden" name="xueli"  data-descriptions="下拉控件">
 		              	</div>
 		            </div>
 			    </div>
-			    <!-- 字母或数字 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               字母或数字:
 				            </label>
@@ -159,15 +161,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="zmhsz" placeholder="" data-required="true" data-rules="zmhsz" data-descriptions="字母或数字">
+		                	<input class="item-text" type="text" value="" name="zmhsz" placeholder="" data-rules="zmhsz" data-descriptions="字母或数字">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 中文 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               中文:
 				            </label>
@@ -175,15 +175,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="zw" placeholder="" data-required="true" data-rules="zw" data-descriptions="中文">
+		                	<input class="item-text" type="text" value="" name="zw" placeholder="" data-rules="zw" data-descriptions="中文">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 英文 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               英文:
 				            </label>
@@ -191,15 +189,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="zm" placeholder="" data-required="true" data-rules="zm" data-descriptions="英文">
+		                	<input class="item-text" type="text" value="" name="zm" placeholder="" data-rules="zm" data-descriptions="英文">
 		                </div>
 		            </div>
 			    </div>
-			     <!-- 负整数 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               负整数:
 				            </label>
@@ -207,11 +203,10 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="fss" placeholder="" data-required="true" data-rules="fss" data-descriptions="负整数">
+		                	<input class="item-text" type="text" value="" name="fss" placeholder="" data-rules="fss" data-descriptions="负整数">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 正整数 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
@@ -223,15 +218,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="zss" placeholder="" data-required="true" data-rules="zss" data-descriptions="正整数">
+		                	<input class="item-text" type="text" value="" name="zss" placeholder=""  data-rules="zss;required" data-descriptions="正整数">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 整数 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               整数:
 				            </label>
@@ -239,11 +232,10 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="n" placeholder="" data-required="true" data-rules="n" data-descriptions="整数">
+		                	<input class="item-text" type="text" value="" name="n" placeholder=""data-rules="n" data-descriptions="整数">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 身份证 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
@@ -255,15 +247,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="idcard" placeholder="" data-required="true" data-rules="idcard" data-descriptions="身份证">
+		                	<input class="item-text" type="text" value="" name="idcard" placeholder="" data-rules="idcard;required" data-descriptions="身份证">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 邮箱 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               邮箱：
 				            </label>
@@ -271,15 +261,13 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="email" placeholder="" data-required="true" data-rules="email" data-descriptions="邮箱">
+		                	<input class="item-text" type="text" value="" name="email" placeholder=""  data-rules="email" data-descriptions="邮箱">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 手机号码 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
-			                <span class="star">*</span>
 			                <label>
 				               手机号码：
 				            </label>
@@ -287,11 +275,10 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="mobile" placeholder="" data-required="true" data-rules="mobile" data-descriptions="手机号码">
+		                	<input class="item-text" type="text" value="" name="mobile" placeholder="" data-rules="mobile" data-descriptions="手机号码">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 电话号码 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
@@ -303,11 +290,10 @@
 		            </div>
 		             <div class="col-66">
 		             	<div class="row-item">
-		                	<input class="item-text" type="text" value="" name="telephone" placeholder="" data-required="true" data-rules="telephone" data-descriptions="电话号码">
+		                	<input class="item-text" type="text" value="" name="telephone" placeholder="" data-rules="telephone;required" data-descriptions="电话号码">
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 邮编 -->
 			    <div class="row">
 			    	<div class="col-33">
 			            <div class="row-item">
@@ -323,7 +309,6 @@
 		                </div>
 		            </div>
 			    </div>
-			    <!-- 单选 -->
 			    <div class="row">
 			    	<div class="col-33">
 			    	    <div class="row-item">
@@ -342,7 +327,6 @@
 		              	</div>
 		            </div>
 			    </div>
-			    <!-- 多选 -->
 			    <div class="row">
 			    	<div class="col-33">
 			    	    <div class="row-item">

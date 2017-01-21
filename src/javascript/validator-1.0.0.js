@@ -29,20 +29,28 @@
 	
 	var type = ['input:not([type]),input[type="color"],input[type="date"],input[type="datetime"],input[type="datetime-local"],input[type="email"],input[type="file"],input[type="hidden"],input[type="month"],input[type="number"],input[type="password"],input[type="range"],input[type="search"],input[type="tel"],input[type="text"],input[type="time"],input[type="url"],input[type="week"],textarea', 'select', 'input[type="checkbox"],input[type="radio"]'],
 		allTypes=type.join(",");
-
+	// 删除数组中的某项
+	var removeArgItem = function(arg,item){
+		arg.forEach(function(el,index,arr){
+			if(el == item) {
+		      arr.splice(index, 1);
+		    };
+		});
+	};
 	var Validator = function( $form, settings){
 		var $fields = $form.find(allTypes); 
 		var settings = $.extend(true, Validator.defaults, settings);
-		var self = this;
+		var that = this;
 
 		this.$form = $form;
-
+		this.$fields = $fields;
+		this.settings = settings;
 		$fields.each(function(){
 			var $this=$(this);
 			if($this.is(allTypes)){
 				// 绑定onchange
 				$(this).on('change', function(event) {
-					self.checkFiled($this, settings);
+					that.checkFiled($this, settings);
 				});
 				// 绑定blur
 			};
@@ -53,7 +61,7 @@
 			settings.isFirstTime = true;
 			$fields.each(function() {
 				var $this = $(this);
-				var status = self.checkFiled($this, settings);
+				var status = that.checkFiled($this, settings);
 				if(!status) {
 					formValid = false;
 				}
@@ -68,20 +76,20 @@
 			event.stopImmediatePropagation();
 		});
 		// 检查表单验证是否通过
-		this.checkForm = function(){
-			var self = this;
-			var formValid = true; 
+		// this.checkForm = function(){
+		// 	var that = this;
+		// 	var formValid = true; 
 
-			settings.isFirstTime = true;
-			$fields.each(function() {
-				var $this = $(this);
-				var status = self.checkFiled($this, settings);
-				if(!status) {
-					formValid = false;
-				}
-			});
-			return formValid;
-		};
+		// 	settings.isFirstTime = true;
+		// 	$fields.each(function() {
+		// 		var $this = $(this);
+		// 		var status = that.checkFiled($this, settings);
+		// 		if(!status) {
+		// 			formValid = false;
+		// 		}
+		// 	});
+		// 	return formValid;
+		// };
 	};
 	// 默认设置
 	Validator.defaults = {
@@ -196,60 +204,67 @@
 	};
 	// 方法
 	Validator.prototype = {
+		checkForm : function(){
+			var that = this;
+			var formValid = true; 
+
+			that.settings.isFirstTime = true;
+			that.$fields.each(function() {
+				var $this = $(this);
+				var status = that.checkFiled($this, that.settings);
+				if(!status) {
+					formValid = false;
+				}
+			});
+			return formValid;
+		},
 		checkFiled : function($field, settings){	
-			var status = true;
-			var errorMsgArg = [];
+			var status = true;  
+			var that = this;
+			var errorMsg;
 			var fieldValue = $.trim($field.val()) || "";     	// value值
 			var rules = $field.attr("data-rules");				// 规则
 			var descriptions = $field.attr('data-descriptions');// value描述
-			var self = this;
 			// 验证规则验证
-			if(rules !== 'undefined' && typeof rules !== 'undefined' && rules !== '' && rules !== 'null'  && typeof rules !== 'null') {
+			 if(rules !== 'undefined' && typeof rules !== 'undefined' && rules !== '' && rules !== 'null'  && typeof rules !== 'null') {
 				var rulesAry = rules.split(';');
 				var isRequired = rulesAry.indexOf('required') >= 0; // 是否必填
+
+				// 不必填切空值，不需要校验
+				if(!isRequired && fieldValue === ''){
+					return status;
+				};
+				
+				// 其他规则校验
 				rulesAry.forEach(function(currentRule,index,ary){
-
-					if($field.is(type[2])){
-						if(self.$form.find('[name="'+$field.prop('name')+'"]:checked').length==0){
+					// 必填// 单选、复选  
+					if(currentRule === 'required' && $field.is(type[2])){
+						if(that.$form.find('[name="'+$field.prop('name')+'"]:checked').length==0){
 							status = false;
-							errorMsgArg.push(Validator.messages[currentRule]);
-
+							
 						}else{
-							status = $field.is(':checked');
+							status = true;
 						};
 					}else{
-						// value 值为空且不必填，不进行规则验证
-						if($field.is(type[0]) && !isRequired && fieldValue === ''){
-							return status;
-						};
-
-						// 当没有定义规则时，返回true
-						if(typeof Validator.rules[currentRule] === 'undefined'){
-							
-							console.error('没有配置规则'+currentRule);
-							return status;
-						};
-						// 验证规则
-						var currentStatus = Validator.rules[currentRule](fieldValue, $field);
-						var errorMsg = Validator.messages[currentRule];
-						if(!currentStatus){
-							status = false;
-							errorMsgArg.push(errorMsg);
-						};
+						status = Validator.rules[currentRule](fieldValue, $field);
+					};
+					errorMsg = Validator.messages[currentRule];
+					// 提示信息
+					if(!status){
+						// 提示信息
+						if(settings.isFirstTime){
+							that.showMsg(addDescriptions(descriptions,errorMsg));
+							// 获取焦点
+							$field.focus();
+						}
+						that.borderColor($field, status);
+						settings.isFirstTime = false;
+						return status;
 					};
 				});
-			};
-			console.log(errorMsgArg);
-			// 提示信息
-			if(!status && settings.isFirstTime){
-				// 提示信息
-				self.showMsg(addDescriptions(descriptions,errorMsgArg[0]));
-				// 获取焦点
-				$field.focus();
-				settings.isFirstTime = false;
-			};
+			 };
 			// 红框显示
-			self.borderColor($field, status);
+			that.borderColor($field, status);
 			return status;
 		},
 		showMsg : function(msg){
