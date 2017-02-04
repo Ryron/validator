@@ -122,6 +122,7 @@
 			// 电话号码
 			var reg = /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/;
             return reg.test(val);
+	
 		},
 		"mobile":function(val){
 			// 手机号码
@@ -166,7 +167,7 @@
 		"n":function(val){
             // 整数
             var reg = /^-?[1-9]\d*$/;
-            return reg.test(val);
+            return reg.test(val);  
 		},
 		"zss":function(val){
 			// 正整数
