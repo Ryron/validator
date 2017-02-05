@@ -3,39 +3,50 @@
 ## 更新说明
 版本 | 时间 | 更新内容
 ---|---|---
-v1.1.0 | 2017-01-12 |  1、添加默认验证提示 2、修改拓展规则 3、alert 提示改成 toast 4、修改拓展方法
+v1.0.0 | 2017-02-05 |  初始化
 
-## 1.引入mdvalidate.js
+
+## 1.引入validator.js
 ```
-<script src="./mdvalidate-1.0.0.js"></script>
+<script src="../dist/javascript/validator-1.0.0.js"></script>
 ```
-**mdvalidate 依赖jquery或zepto（建议zepto）**
+**validator 依赖jquery或zepto（建议zepto）**
 
 ## 2.表单使用
 ```
-<input class="" type="text" value="" name="url" data-required="true" data-rules="url" data-descriptions="url" placeholder="">
+<input class="" type="text" value="" name="url" data-rules="required;url" data-descriptions="url" placeholder="">
 ```
+**验证规则写在data-rules,用 ; 隔开。验证顺序从左到右依次进行，建议将必填（required）写在最前**
 
 属性 | 说明 | 备注
 ---|---|---
-data-required | true/false 是否必填 
-data-rules    | 验证规则 ,暂时只支持一种验证规则
-data-descriptions | 描述，用于验证错误是提示 | 
-placeholder   | 如果placeholder有值，当该输入框为空（必填项），则弹出placeholder 
+data-rules    | 验证规则 ,验证顺序从左到右依次进行
+data-descriptions | 描述 ,用于验证错误是提示 | 
 
 ## 3.调用
 
+表单submit
 ```
-$('#test_form').mdvalidate({
-		    valid:function(){
-		    	alert('验证通过');
-		    	var data = $(this).serializeArray();
-		    	console.log(data);
-		    },
-		    invalid:function(){
-		    	alert('验证失败');
-		    }
-		});
+var testForm = $('#test_form').mdvalidate({
+    valid:function(){
+    	alert('验证通过');
+    	var data = $(this).serializeArray();
+    	console.log(data);
+    },
+    invalid:function(){
+    	console.warn("验证失败");
+    }
+});
+```
+直接onclick
+```
+function sub(){
+	// status Boolean true/false
+	// true 验证成功
+	// false 验证错误
+	var status = testForm.checkForm();
+	console.log(status);
+};
 ```
 
  参数 | 说明 | 备注
@@ -43,7 +54,7 @@ $('#test_form').mdvalidate({
 valid  | 验证通过回调方法
 invalid   | 验证失败回调方法
 
-ps：test_form 必须是表单
+**test_form 必须是表单**
 
 ## 4.拓展
 <small>为了方法复用，独立拓展模块/small>
