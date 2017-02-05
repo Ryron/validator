@@ -130,3 +130,10 @@ fss    	   | 负整数
 "n" | "请输入整数",
 "zss" | "请输入正整数",
 "fss" | "请输入负整数"
+
+## 7.城市区划代码
+
+```
+<script src="../libs/sui/0.6.2/js/sm-cityCode-picker.js"></script>
+```
+**sui原有sm-city-picker没有提供城市区划代码，sm-cityCode-picker由sm-city-picker修改得来。详见demo cityCode.html**
