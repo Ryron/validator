@@ -10,7 +10,11 @@ v1.0.0 | 2017-02-05 |  初始化
 ```
 <script src="../dist/javascript/validator-1.0.0.js"></script>
 ```
-**validator 依赖jquery或zepto（建议zepto）**
+**validator 依赖jquery或zepto（建议zepto）。**
+<font style="color:red;">使用jquery必须添加</font>
+```
+<script>var Zepto = jQuery</script>
+```
 
 ## 2.表单使用
 ```
