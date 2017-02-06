@@ -290,6 +290,7 @@
 			};
 		}
 	};
+	// 初始化
 	$.fn.mdvalidate = function(settings ){
 		var $form = $(this);
 		var vt = $form.data("validator");
