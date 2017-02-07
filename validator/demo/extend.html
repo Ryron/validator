@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="email=no" name="format-detection" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="../libs/sui/0.6.2/css/sm.css">
+	<link rel="stylesheet" href="../dist/css/validator.css">
+</head>
+<body>
+    <div class="form">
+	    <div class="content">
+			<div class="list-block">
+			  <form id="test_form">
+			    <header class="bar bar-nav">
+			    	<h1 class="title">demo</h1>
+			    </header>
+    			    <div class="row">
+				    	<div class="col-33">
+				            <div class="row-item">
+				                <span class="star">*</span>
+				                <label>
+					               拓展数字:
+					            </label>
+				            </div>
+			            </div>
+			             <div class="col-66">
+			             	<div class="row-item">
+			                	<input class="item-text" type="text" value="" name="url" placeholder="请输入数字" data-rules="required;number" data-descriptions="拓展数字错误">
+			                </div>
+			            </div>
+				    </div>
+				    <div class="row">
+				        <div class="col-100"><a href="#" class="button button-fill button-success" onclick="sub()">提交</a></div>
+				    </div>
+			      </div>
+			   </form>
+			</div>
+		</div>
+	</div>
+	<script src='../libs/zepto/1.2.0/zepto.js'></script>
+	<script src='../libs/sui/0.6.2/js/sm.js'></script>
+	<script src="../dist/javascript/validator-1.0.0.js"></script>
+	<script>
+	// 拓展验证
+	$.mdvalidateExtend({
+		rules:{
+			number:function(val,$field){
+				var reg = /^[1-9]\d*$/;
+        		return reg.test(val);
+			}
+		},
+		messages:{
+			number:"请输入数字"
+		}
+    });
+
+	var testForm = $('#test_form').mdvalidate({
+	    valid:function(){
+	    	
+	    },
+	    invalid:function(){
+	    	
+	    }
+	});
+	function sub(){
+		// status Boolean true/false
+		// true 验证成功
+		// false 验证错误
+		var status = testForm.checkForm();
+		console.log(status);
+	};
+	</script>
+</body>
+</html>

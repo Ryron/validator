@@ -227,7 +227,7 @@
 			var rules = $field.attr("data-rules");				// 规则
 			var descriptions = $field.attr('data-descriptions');// value描述
 			// 验证规则验证
-			 if(rules !== 'undefined' && typeof rules !== 'undefined' && rules !== '' && rules !== 'null'  && typeof rules !== 'null') {
+			if(rules !== 'undefined' && typeof rules !== 'undefined' && rules !== '' && rules !== null  && typeof rules !== 'null') {
 				var rulesAry = rules.split(';');
 				var isRequired = rulesAry.indexOf('required') >= 0; // 是否必填
 
@@ -237,8 +237,12 @@
 				};
 				
 				// 其他规则校验
-				rulesAry.forEach(function(currentRule,index,ary){
+				//rulesAry.map(function(currentRule,index,ary){
+				for(var index = 0,len = rulesAry.length; index<len; index++){
+					var currentRule = rulesAry[index];
 					// 必填// 单选、复选  
+					if(currentRule === '') return status;
+
 					if(currentRule === 'required' && $field.is(type[2])){
 						if(that.$form.find('[name="'+$field.prop('name')+'"]:checked').length==0){
 							status = false;
@@ -247,6 +251,11 @@
 							status = true;
 						};
 					}else{
+						if(typeof Validator.rules[currentRule] === 'undefined') {
+							status = true;
+							console.error("没有匹配到规则"+currentRule);
+							return status;
+						}
 						status = Validator.rules[currentRule](fieldValue, $field);
 					};
 					errorMsg = Validator.messages[currentRule];
@@ -262,10 +271,12 @@
 						settings.isFirstTime = false;
 						return status;
 					};
-				});
-			 };
-			// 红框显示
-			that.borderColor($field, status);
+				};
+
+				// 红框显示
+				that.borderColor($field, status);
+			 }
+			
 			return status;
 		},
 		showMsg : function(msg){
@@ -276,6 +287,7 @@
 			if($field.prop("type")=="radio" || $field.prop("type")=="checkbox"){
 				var $fields = this.$form.find('[name="'+$field.prop('name')+'"]');
 				var $tagBox =  $fields.next('.item-media').find('.icon');
+
 				if($fields.filter(":checked").length > 0){
 					$tagBox.removeClass('color-error')
 				}else{
