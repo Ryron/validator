@@ -39,33 +39,62 @@
 		              	</div>
 		            </div>
 			    </div>
+			    <div class="row">
+			    	<div class="col-33">
+			    	    <div class="row-item">
+				            <span class="star">*</span>
+			                <label>
+				               请选择街道：
+				            </label>
+			    	    </div>
+		            </div>
+		             <div class="col-66">
+		              	<div class="row-item">
+			             	<input class="item-text" type="text" name="distreat" id='street-picker' placeholder="请选择地区" data-required="true" data-descriptions="单位地域" />
+			             	<input class="item-text" type="hidden" name="distreat" id='street-picker-hide'/>
+		              	</div>
+		            </div>
+			    </div>
 		      </form>
 		    </div>
 	    </div>
 	</div>
 	<script src='../libs/zepto/1.2.0/zepto.js'></script>
-	<script src="../dist/javascript/area.js"></script>
+	<!-- <script src="../dist/javascript/area.js"></script> -->
 	<!-- <script src="../../libs/jquery/2.1.4/jquery.min.js"></script> -->
 	<!-- <script>var Zepto = jQuery</script> -->
 	<script src='../libs/sui/0.6.2/js/sm.js'></script>
-	<script src="../libs/sui/0.6.2/js/sm-cityCode-pickertest.js"></script>
+	<script src="../libs/sui/0.6.2/js/sm-cityCode-picker.js"></script>
 	<script src="../dist/javascript/validator-1.0.0.js"></script>
 
 	<script>
 	    // 地址控件
-		// $("#city-picker").cityPicker({
-		//     toolbarTemplate: '<header class="bar bar-nav">\
-		//     <button class="button button-link pull-right close-picker">确定</button>\
-		//     <h1 class="title">选择地址</h1>\
-		//     </header>',
-		//     formatValue: function (picker, value, displayValue){
-		//     	console.log(value);
-		//     	$('#province').val(value[0]);  // 设置省  
-		//     	$('#city').val(value[1]);      // 设置市
-		//     	$('#area').val(value[2]);     // 设置地区
-		//     	return displayValue.join(' ');
-		//     }
-		// });
+	    // 街道控件
+	    // streetId  input id   必填
+	    // street    街道picker 配置  必填
+		$("#city-picker").cityPicker({
+		    toolbarTemplate: '<header class="bar bar-nav">\
+		    <button class="button button-link pull-right close-picker">确定</button>\
+		    <h1 class="title">选择地址</h1>\
+		    </header>',
+		    formatValue: function (picker, value, displayValue){
+		    	$('#province').val(value[0]);  // 设置省  
+		    	$('#city').val(value[1]);      // 设置市
+		    	$('#area').val(value[2]);     // 设置地区
+		    	return displayValue.join(' ');
+		    },
+		    streetId:'street-picker',
+		    street:{
+		    	toolbarTemplate: '<header class="bar bar-nav">\
+			    <button class="button button-link pull-right close-picker">确定</button>\
+			    <h1 class="title">选择街区</h1>\
+			    </header>',
+			    formatValue: function (picker, value, displayValue){
+			   		$('#street-picker-hide').val(value[0]);
+			    	return displayValue;
+			    }
+		    }
+		});
 	</script>
 </body>
 </html>
