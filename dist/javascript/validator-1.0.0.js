@@ -240,15 +240,20 @@
 				//rulesAry.map(function(currentRule,index,ary){
 				for(var index = 0,len = rulesAry.length; index<len; index++){
 					var currentRule = rulesAry[index];
-					// 必填// 单选、复选  
-					if(currentRule === '') return status;
+					// 必填
+					if(currentRule === '') continue;
 
 					if(currentRule === 'required' && $field.is(type[2])){
+						// 单选、复选  
 						if(that.$form.find('[name="'+$field.prop('name')+'"]:checked').length==0){
 							status = false;
-							
 						}else{
 							status = true;
+						};
+					}else if(currentRule === 'required' && $field.is(type[1])){
+						// select
+						if(fieldValue === '' || fieldValue === '请选择'){
+							status = false;
 						};
 					}else{
 						if(typeof Validator.rules[currentRule] === 'undefined') {
@@ -259,6 +264,8 @@
 						status = Validator.rules[currentRule](fieldValue, $field);
 					};
 					errorMsg = Validator.messages[currentRule];
+					that.borderColor($field, status);
+
 					// 提示信息
 					if(!status){
 						// 提示信息
@@ -267,16 +274,15 @@
 							// 获取焦点
 							$field.focus();
 						}
-						that.borderColor($field, status);
 						settings.isFirstTime = false;
 						return status;
 					};
+					
 				};
 
 				// 红框显示
-				that.borderColor($field, status);
+				//that.borderColor($field, status);
 			 }
-			
 			return status;
 		},
 		showMsg : function(msg){
