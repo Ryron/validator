@@ -61,7 +61,7 @@ invalid   | 验证失败回调方法
 **test_form 必须是表单**
 
 ## 4.拓展
-<small>为了方法复用，独立拓展模块/small>
+<small>为了方法复用，独立拓展模块</small>
 
 ```
 $.mdvalidateExtend({
