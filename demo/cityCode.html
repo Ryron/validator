@@ -64,7 +64,8 @@
 	<!-- <script src="../../libs/jquery/2.1.4/jquery.min.js"></script> -->
 	<!-- <script>var Zepto = jQuery</script> -->
 	<script src='../libs/sui/0.6.2/js/sm.js'></script>
-	<script src="../libs/sui/0.6.2/js/sm-cityCode-picker.js"></script>
+	<script src="../dist/javascript/area.js"></script>
+	<script src="../dist/javascript/sm-cityCode-picker.js"></script>
 	<script src="../dist/javascript/validator-1.0.0.js"></script>
 
 	<script>
@@ -83,6 +84,7 @@
 		    	$('#area').val(value[2]);     // 设置地区
 		    	return displayValue.join(' ');
 		    },
+		    level:3,
 		    streetId:'street-picker',
 		    street:{
 		    	toolbarTemplate: '<header class="bar bar-nav">\
